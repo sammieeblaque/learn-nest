@@ -38,10 +38,10 @@ export const users: UsersType[] = [
 
 export type Role = 'Intern' | 'Admin' | 'Buyer';
 
-export type UsersType = {
+export interface UsersType {
   email: string;
-  id?: string;
-  phone?: string;
+  id: string;
+  phone: string;
   name: string;
   role: Role;
-};
+}

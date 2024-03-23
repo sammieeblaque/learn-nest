@@ -9,11 +9,13 @@ import {
   Query,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
-import { Role, UsersType } from 'src/constants/users.constants';
+import { Role } from 'src/constants/users.constants';
+import { CreateUserDto } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Controller('users')
 export class UsersController {
-  constructor(private usersService: UsersService) {}
+  constructor(private readonly usersService: UsersService) {}
   @Get()
   findAll(@Query('role') role?: Role) {
     if (role?.toLowerCase() === 'admin') {
@@ -27,12 +29,12 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
   @Post()
-  create(@Body() user: UsersType) {
-    return this.usersService.create(user);
+  create(@Body() createUserDto: CreateUserDto) {
+    return this.usersService.create(createUserDto);
   }
   @Patch(':id')
-  update(@Param('id') id: string, @Body() userUpdate: UsersType) {
-    return this.usersService.update(id, userUpdate);
+  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
+    return this.usersService.update(id, updateUserDto);
   }
 
   @Delete(':id')

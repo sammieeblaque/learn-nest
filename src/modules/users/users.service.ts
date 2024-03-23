@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { Role, users } from 'src/constants/users.constants';
+import { faker } from '@faker-js/faker';
+import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UsersService {
@@ -7,7 +10,9 @@ export class UsersService {
 
   findAll(role?: Role) {
     if (role) {
-      return this.users.filter((user) => user.role === role?.toLowerCase());
+      return this.users.filter(
+        (user) => user.role?.toLowerCase() === role?.toLowerCase(),
+      );
     }
     return this.users;
   }
@@ -16,22 +21,19 @@ export class UsersService {
     return this.users.find((user) => user.id === id);
   }
 
-  create(user: { name: string; email: string; role: Role }) {
+  create(createUserDto: CreateUserDto) {
     const newUser = {
-      id: 'UTD28MZQ7Rk',
-      ...user,
+      id: faker.string.alphanumeric(11).toUpperCase(),
+      ...createUserDto,
     };
-
-    return this.users.push(newUser);
+    this.users.push(newUser);
+    return newUser;
   }
 
-  update(
-    id: string,
-    userUpdate: { name?: string; email?: string; role?: Role },
-  ) {
+  update(id: string, updateUserDto: UpdateUserDto) {
     this.users = this.users.map((user) => {
       if (user.id === id) {
-        return { ...user, ...userUpdate };
+        return { ...user, ...updateUserDto };
       }
       return user;
     });
