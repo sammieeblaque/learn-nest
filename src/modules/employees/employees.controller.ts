@@ -22,7 +22,7 @@ export class EmployeesController {
 
   @Get()
   findAll(@Query('role') role?: Role) {
-    if (role.toLowerCase() === 'engineer') console.log("I'm prisma");
+    if (role?.toLowerCase() === 'engineer') console.log("I'm prisma");
     return this.employeesService.findAll(role);
   }
 
