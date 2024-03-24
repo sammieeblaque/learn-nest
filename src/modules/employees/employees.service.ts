@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Injectable } from '@nestjs/common';
 import { Prisma, Role } from '@prisma/client';
 import { DatabaseService } from '../database/database.service';
