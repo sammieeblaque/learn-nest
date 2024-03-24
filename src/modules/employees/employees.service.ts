@@ -2,7 +2,6 @@
 import { Injectable } from '@nestjs/common';
 import { Prisma, Role } from '@prisma/client';
 import { DatabaseService } from '../database/database.service';
-import { UserEnums, UsersType } from 'src/constants/users.constants';
 
 @Injectable()
 export class EmployeesService {
