@@ -45,3 +45,9 @@ export interface UsersType {
   name: string;
   role: Role;
 }
+
+export enum UserEnums {
+  Intern,
+  Admin,
+  Buyer,
+}
